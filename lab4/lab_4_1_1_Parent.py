@@ -1,31 +1,36 @@
-class Product:
-    def __init__(self, price, product_volume):
-        if isinstance(price, (int, float)) and isinstance(product_volume, (int, float)):
-            self.price = price
-            self.product_volume = product_volume
-        else:
-            raise ValueError("Введите целые числа, для значений цены и объема")
+from datetime import datetime
 
-    def sale(self, discount):
-        if isinstance(discount, (int, float)):
-            return self.price - round(self.price * (discount/100), 2)
-        else:
-            raise ValueError("Введите целое число для значения процента")
 
-    def volume(self, depth, width, length):
-        if isinstance(depth, (int, float)) and isinstance(width, (int, float)) and isinstance(length, (int, float)):
-            return (depth * width * length) // self.product_volume
+class Car:
+    def __init__(self, car_name: str, oil_volume: int):
+        if isinstance(car_name, str) and isinstance(oil_volume, (int, float)):
+            self.car_name = car_name
+            self.oil_volume = oil_volume
+            self.remaining_oil = 0
+            self.lst_data = []
         else:
-            raise ValueError("Введите целые числа")
+            raise ValueError("Введите марку автомобиля, и объем бензобака в литрах")
+
+    def refill(self, liters_oil: int):
+        if isinstance(liters_oil, (int, float)):
+            if self.remaining_oil + liters_oil <= self.oil_volume:
+                self.remaining_oil += liters_oil
+                self.lst_data.append((datetime.now(), liters_oil))
+            else:
+                raise ValueError("Вы переполнили бензобак")
+        else:
+            raise ValueError("Введите целое число для значения литров бензина")
+
+    @staticmethod
+    def mean_consumption(kilometer: (int, float)):
+        if isinstance(kilometer, (int, float)):
+            return f'Примерная трата бензина {kilometer * 8.2}'
 
     def get_info(self):
         return self.__str__()
 
-    def __add__(self, other):
-        return self.price + other.price
-
     def __str__(self):
-        return f'Цена продукта: {self.price}, объем одной единицы продукта: {self.product_volume}'
+        return f'Последние заправки были в числах {self.lst_data[0][:10]}, каждый раз было : {self.lst_data[1][:10]} литров'
 
-
-
+    def __lt__(self, other):
+        return self.oil_volume < other.oil_volume

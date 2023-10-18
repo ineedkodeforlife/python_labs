@@ -1,12 +1,13 @@
-from lab_4_1_1_Parent import Product
+from lab_4_1_1_Parent import Car
 
 
-class Lamp(Product):
-    def __init__(self, price, product_volume, light):
-        Product.__init__(self, price, product_volume)
-        self.light = light
+class EliteCar(Car):
+    def __init__(self, tractor_name: str, oil_volume: (int, float), price: (int, float)):
+        Car.__init__(self, tractor_name, oil_volume)
+        if isinstance(price, (int, float)):
+            self.price = price
+        else:
+            raise ValueError("Цена автомобиля должна быть числом")
 
-    def __str__(self):
-        return f'Цена продукта: {self.price}, объем одной единицы продукта: {self.product_volume}, цвет света: ' \
-               f'{self.light}'
-
+    def price_after_year(self, year):
+        return self.price * year
