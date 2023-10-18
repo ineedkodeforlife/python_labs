@@ -1,10 +1,11 @@
 s, x = input(), input()
-arr_del = []
-for i in range(len(s) - len(x) + 1):
-    if x.lower() == s[i: i + len(x)].lower():
-        arr_del.append(s[i: i + len(x)])
-
-for i in set(arr_del):
-    s = s.replace(i, '')
-
+ss, xx = s.lower(), x.lower()
+while True:
+    if xx in ss:
+        new_ind = ss.index(xx)
+        s = s[:new_ind] + s[new_ind + len(xx):]
+        ss = ss[:new_ind] + ss[new_ind + len(xx):]
+        # print(s)
+    else:
+        break
 print(s)
