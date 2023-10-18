@@ -27,10 +27,14 @@ class Car:
             return f'Примерная трата бензина {kilometer * 8.2}'
 
     def get_info(self):
-        return self.__str__()
+        if len(self.lst_data) > 0:
+            return self.__str__()
+        else:
+            return "Заправок еще не было"
 
     def __str__(self):
-        return f'Последние заправки были в числах {self.lst_data[0][:10]}, каждый раз было : {self.lst_data[1][:10]} литров'
+        return f'Последние заправки были в числах {self.lst_data[:10][0]}, каждый раз было : ' \
+               f'{self.lst_data[:10][1]} литров'
 
     def __lt__(self, other):
         return self.oil_volume < other.oil_volume
