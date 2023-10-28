@@ -57,7 +57,7 @@ def test_elite_car_price_after_year():
 
 @pytest.fixture(scope="module")
 def value():
-    return ['lambo', 1200]
+    yield ['lambo', 1200]
 
 
 def test_fixt(value):
