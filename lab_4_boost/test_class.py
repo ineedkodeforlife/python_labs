@@ -1,5 +1,4 @@
 import pytest
-
 from lab_4_1_1_Daughter_1 import *
 from lab_4_1_1_Daughter_2 import *
 from class_run import My_except
@@ -54,6 +53,19 @@ def test_tractor_mean_consumption():
 def test_elite_car_price_after_year():
     elite_car = EliteCar("Mercedes", 80, 1000000)
     assert elite_car.price_after_year(20) == 20000000
+
+
+@pytest.fixture(scope="module")
+def value():
+    return ['lambo', 1200]
+
+
+def test_fixt(value):
+    lst_value = value
+    car_tetst = Car(lst_value[0], lst_value[1])
+    car1 = Car('lambo', 1200)
+    assert car_tetst.car_name == car1.car_name
+
 
 
 # def test_file_write():
